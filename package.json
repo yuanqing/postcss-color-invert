@@ -32,7 +32,7 @@
     "test": "tape test.js"
   },
   "files": [
-    "src"
+    "index.js"
   ],
   "keywords": [
     "css",
