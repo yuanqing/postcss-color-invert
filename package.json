@@ -27,8 +27,8 @@
   "scripts": {
     "clean": "rimraf '*.log' .nyc_output coverage",
     "coverage": "nyc --reporter=lcov --reporter=text -- tape test.js",
-    "fix": "prettier-standard '*.js'",
-    "lint": "standard '*.js'",
+    "fix": "prettier-standard '*.js' 'example/**/*.js'",
+    "lint": "standard '*.js' 'example/**/*.js'",
     "test": "tape test.js"
   },
   "files": [
