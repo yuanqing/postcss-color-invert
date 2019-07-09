@@ -7,22 +7,19 @@ const hslaRegex = require('hsla-regex')()
 const rgbRegex = require('rgb-regex')()
 const rgbaRegex = require('rgba-regex')()
 
-const postcssTransformColor = postcss.plugin(
-  'postcss-transform-color',
-  function () {
-    return function (root) {
-      root.walkDecls(function (decl) {
-        let value = decl.value
-        value = invertColor(value, hexRegex, hex)
-        value = invertColor(value, rgbRegex, rgb)
-        value = invertColor(value, rgbaRegex, rgb)
-        value = invertColor(value, hslRegex, hsl)
-        value = invertColor(value, hslaRegex, hsl)
-        decl.value = value
-      })
-    }
+const postcssColorInvert = postcss.plugin('postcss-color-invert', function () {
+  return function (root) {
+    root.walkDecls(function (decl) {
+      let value = decl.value
+      value = invertColor(value, hexRegex, hex)
+      value = invertColor(value, rgbRegex, rgb)
+      value = invertColor(value, rgbaRegex, rgb)
+      value = invertColor(value, hslRegex, hsl)
+      value = invertColor(value, hslaRegex, hsl)
+      decl.value = value
+    })
   }
-)
+})
 
 function invertColor (value, regexp, transform) {
   return value.replace(regexp, function (match) {
@@ -40,4 +37,4 @@ function rgb (value) {
   return value.rgb().string()
 }
 
-module.exports = postcssTransformColor
+module.exports = postcssColorInvert

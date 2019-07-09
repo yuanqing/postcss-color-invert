@@ -1,12 +1,12 @@
 const postcss = require('postcss')
 const test = require('tape')
 
-const postcssTransformColor = require('./')
+const postcssColorInvert = require('./')
 
 function run (input, output) {
   return async function (t) {
     t.plan(2)
-    const result = await postcss([postcssTransformColor()]).process(input, {
+    const result = await postcss([postcssColorInvert]).process(input, {
       from: null
     })
     t.equal(result.css, output)
